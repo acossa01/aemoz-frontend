@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AEMOZ - Sistema de Sorteio UNILAB</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Tela Home -->
+        <div id="home-screen" class="screen home-screen">
+            <div class="shared-data-alert">
+                <h4>🌐 Sistema Compartilhado</h4>
+                <p>AC</p>
+            </div>
+            
+            <div class="logo-container">
+                <div class="logo-circle">
+                </div>
+            </div>
+            
+            <div class="home-content">
+                <h1>AEMOZ</h1>
+                <p class="subtitle">Associação dos Estudantes Moçambicanos</p>
+                <p class="university">UNILAB</p>
+                
+                <div class="action-buttons">
+                    <button onclick="showScreen('cadastro')" class="btn btn-primary">
+                        ➕ Fazer Cadastro
+                    </button>
+                    <button onclick="showScreen('login')" class="btn btn-secondary">
+                        🔒 Área Administrativa
+                    </button>
+                </div>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        👥 <span id="total-participants">0 Participantes</span>
+                    </div>
+                    <div class="stat-item">
+                        📚 <span id="total-courses">0 Cursos</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tela Cadastro -->
+        <div id="cadastro-screen" class="screen hidden">
+            <div class="form-header">
+                <div class="logo-mini">
+                </div>
+                <h2>Cadastro de Participante</h2>
+            </div>
+            
+            <div class="form-container">
+                <div class="form-group">
+                    <label>Nome do Interessado</label>
+                    <input type="text" id="nome" placeholder="Digite seu nome completo" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Curso</label>
+                    <select id="curso" required>
+                        <option value="">Selecione seu curso</option>
+                        <option value="Administração Pública">Administração Pública</option>
+                        <option value="Agronomia">Agronomia</option>
+                        <option value="Antropologia">Antropologia</option>
+                        <option value="Bacharelado em Humanidades – BHU">Bacharelado em Humanidades – BHU</option>
+                        <option value="Ciências Biológicas – Licenciatura">Ciências Biológicas – Licenciatura</option>
+                        <option value="Ciências da Natureza e Matemática">Ciências da Natureza e Matemática</option>
+                        <option value="Ciências Sociais">Ciências Sociais</option>
+                        <option value="Enfermagem">Enfermagem</option>
+                        <option value="Engenharia de Alimentos">Engenharia de Alimentos</option>
+                        <option value="Engenharia de Computação">Engenharia de Computação</option>
+                        <option value="Engenharia de Energias">Engenharia de Energias</option>
+                        <option value="Farmácia">Farmácia</option>
+                        <option value="Física">Física</option>
+                        <option value="História">História</option>
+                        <option value="Letras – Língua Portuguesa">Letras – Língua Portuguesa</option>
+                        <option value="Letras – Língua Inglesa">Letras – Língua Inglesa</option>
+                        <option value="Licenciatura em Educação Escolar Quilombola">Licenciatura em Educação Escolar Quilombola</option>
+                        <option value="Licenciatura Intercultural Indígena">Licenciatura Intercultural Indígena</option>
+                        <option value="Matemática – Licenciatura">Matemática – Licenciatura</option>
+                        <option value="Medicina">Medicina</option>
+                        <option value="Pedagogia – Licenciatura">Pedagogia – Licenciatura</option>
+                        <option value="Química – Licenciatura">Química – Licenciatura</option>
+                        <option value="Relações Internacionais">Relações Internacionais</option>
+                        <option value="Serviço Social">Serviço Social</option>
+                        <option value="Sociologia – Licenciatura">Sociologia – Licenciatura</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Semestre</label>
+                    <select id="semestre" required>
+                        <option value="">Selecione o semestre</option>
+                        <option value="1">1º Semestre</option>
+                        <option value="2">2º Semestre</option>
+                        <option value="3">3º Semestre</option>
+                        <option value="4">4º Semestre</option>
+                        <option value="5">5º Semestre</option>
+                        <option value="6">6º Semestre</option>
+                        <option value="7">7º Semestre</option>
+                        <option value="8">8º Semestre</option>
+                        <option value="9">9º Semestre</option>
+                        <option value="10">10º Semestre</option>
+                    </select>
+                </div>
+                
+                <button onclick="cadastrarParticipante()" class="btn btn-primary">
+                    ✓ Confirmar Cadastro
+                </button>
+            </div>
+            
+            <button onclick="showScreen('home')" class="btn btn-back">
+                ← Voltar ao Início
+            </button>
+        </div>
+
+        <!-- Tela Login -->
+        <div id="login-screen" class="screen hidden">
+            <div class="login-container">
+                <div class="logo-mini">
+                </div>
+                
+                <h2>Área Administrativa</h2>
+                
+                <div class="form-group">
+                    <label>Senha de Administrador</label>
+                    <input type="password" id="admin-password" placeholder="Digite a senha" onkeypress="if(event.key==='Enter') fazerLogin()">
+                </div>
+                
+                <button onclick="fazerLogin()" class="btn btn-primary">
+                    🔒 Acessar
+                </button>
+                
+                <button onclick="showScreen('home')" class="btn btn-back">
+                    ← Voltar ao Início
+                </button>
+            </div>
+        </div>
+
+        <!-- Tela Admin -->
+        <div id="admin-screen" class="screen admin-screen hidden">
+            <div class="admin-header">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div class="logo-mini">
+                    </div>
+                    <h2>Painel Administrativo</h2>
+                </div>
+                <button onclick="logout()" class="btn btn-logout">
+                    Sair
+                </button>
+            </div>
+            
+            <div class="admin-stats">
+                <div class="stat-card">
+                    👥
+                    <div>
+                        <h3 id="admin-participants">0</h3>
+                        <p>Participantes</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    📚
+                    <div>
+                        <h3 id="admin-courses">0</h3>
+                        <p>Cursos</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    🏆
+                    <div>
+                        <h3 id="admin-groups">0</h3>
+                        <p>Grupos Formados</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="admin-actions">
+                <button onclick="showScreen('participantes')" class="btn btn-primary">
+                    👁️ Ver Participantes
+                </button>
+                <button onclick="gerarPDF('participantes')" class="btn btn-secondary" id="btn-pdf-participants">
+                    📄 Baixar Lista (PDF)
+                </button>
+                <button onclick="addTestData()" class="btn btn-warning">
+                    🧪 Adicionar Dados de Teste
+                </button>
+                <button onclick="limparTodosDados()" class="btn btn-danger" id="btn-clear-all">
+                    🗑️ Limpar Todos os Dados
+                </button>
+                <button onclick="iniciarSorteio()" class="btn btn-success" id="btn-sorteio">
+                    🎲 Iniciar Sorteio
+                </button>
+                <button onclick="gerarPDF('grupos')" class="btn btn-download hidden" id="btn-pdf-groups">
+                    📄 Baixar Resultado
+                </button>
+            </div>
+            
+            <div class="participants-by-course">
+                <h3>Participantes por Curso</h3>
+                <div id="course-summary"></div>
+            </div>
+        </div>
+
+        <!-- Tela Participantes -->
+        <div id="participantes-screen" class="screen participants-screen hidden">
+            <div class="participants-header">
+                <h2>Lista de Participantes</h2>
+                <button onclick="showScreen('admin')" class="btn btn-back">
+                    ← Voltar
+                </button>
+            </div>
+            
+            <div id="participants-list" class="participants-list"></div>
+        </div>
+
+        <!-- Tela Sorteio -->
+        <div id="sorteio-screen" class="screen sorteio-screen hidden">
+            <div class="sorteio-container">
+                <div id="sorting-animation" class="sorting-animation">
+                    <div class="logo-animation">
+                        <div class="logo-complete spinning">
+                        </div>
+                    </div>
+                    
+                    <h2>Sorteio em Andamento...</h2>
+                    
+                    <div class="progress-steps">
+                        <div class="step" id="step1">Organizando participantes</div>
+                        <div class="step" id="step2">Embaralhando por curso</div>
+                        <div class="step" id="step3">Formando grupos de 4</div>
+                        <div class="step" id="step4">Concluído!</div>
+                    </div>
+                </div>
+                
+                <div id="results-container" class="results-container hidden">
+                    <h2>🎉 Resultado do Sorteio 🎉</h2>
+                    <p class="results-subtitle" id="results-subtitle">Grupos Formados</p>
+                    
+                    <div id="groups-grid" class="groups-grid"></div>
+                    
+                    <div class="results-actions">
+                        <button onclick="gerarPDF('grupos')" class="btn btn-download">
+                            📄 Baixar Resultado
+                        </button>
+                        <button onclick="showScreen('admin')" class="btn btn-secondary">
+                            Voltar ao Painel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
