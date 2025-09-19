@@ -7,9 +7,26 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    color: #333;
+    color: #333; /* Cor padrão do texto */
+    min-height: 100vh; /* Garante que o fundo ocupe toda a tela */
+    margin: 0; /* Remove margens que podem atrapalhar */
+
+    /* --- Propriedades da Imagem de Fundo --- */
+    
+    /* URL da sua imagem */
+    background-image: url('https://www.dropbox.com/scl/fi/0ebo4iy8ka719b752uloi/frica.jpg?rlkey=5m9t3qoe1ijud2jyv2idimty3&dl=1');
+    
+    /* Garante que a imagem cubra todo o espaço sem distorcer */
+    background-size: cover; 
+    
+    /* Centraliza a imagem na tela */
+    background-position: center; 
+    
+    /* Evita que a imagem se repita caso seja pequena */
+    background-repeat: no-repeat; 
+    
+    /* Fixa a imagem para que ela não role junto com o conteúdo */
+    background-attachment: fixed; 
 }
 
 .app {
